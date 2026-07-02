@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f1ea">
+    <title>人生コックピット</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">LIFE COCKPIT</p>
+          <h1>人生コックピット</h1>
+          <p class="lead">残り時間から逆算して、夢を年表に落とし、今日の一手を決める。</p>
+        </div>
+        <button id="openSetupButton" class="ghost-button" type="button">設定</button>
+      </header>
+
+      <section class="hero-grid" aria-label="人生時計">
+        <article class="life-clock">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">AVERAGE LIFE</p>
+              <h2>平均余命まで</h2>
+            </div>
+            <span id="currentTime" class="pill">--:--:--</span>
+          </div>
+          <div id="lifeCountdown" class="countdown" aria-live="polite">--年 --日 --:--:--</div>
+          <div class="meter" aria-hidden="true">
+            <span id="lifeMeter"></span>
+          </div>
+          <div class="stat-row">
+            <div>
+              <strong id="spentPercent">--%</strong>
+              <span>使った時間</span>
+            </div>
+            <div>
+              <strong id="remainingDays">--</strong>
+              <span>残り日数</span>
+            </div>
+            <div>
+              <strong id="remainingWeeks">--</strong>
+              <span>残り週</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="target-card">
+          <p class="eyebrow">TARGET LIFE</p>
+          <h2 id="targetTitle">100歳まで</h2>
+          <div id="targetCountdown" class="target-count">--年 --日</div>
+          <p id="todayQuestion" class="question">今日、未来の自分に渡す一手は？</p>
+          <form id="dailyForm" class="quick-form">
+            <input id="dailyInput" maxlength="80" placeholder="例: 30分だけ新しい事業案を形にする">
+            <button type="submit">決定</button>
+          </form>
+          <ul id="dailyList" class="daily-list"></ul>
+        </article>
+      </section>
+
+      <section class="work-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">DREAM LIST</p>
+              <h2>夢リスト</h2>
+            </div>
+            <button id="addDreamButton" type="button">追加</button>
+          </div>
+          <form id="dreamForm" class="dream-form">
+            <input id="dreamTitle" maxlength="70" placeholder="かなえたいこと">
+            <select id="dreamArea" aria-label="領域">
+              <option value="仕事">仕事</option>
+              <option value="家族">家族</option>
+              <option value="健康">健康</option>
+              <option value="学び">学び</option>
+              <option value="遊び">遊び</option>
+            </select>
+            <input id="dreamYear" type="number" min="2026" max="2100" aria-label="達成年" placeholder="2030">
+            <button type="submit">入れる</button>
+          </form>
+          <div id="dreamList" class="dream-list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">FUTURE MAP</p>
+              <h2>未来年表</h2>
+            </div>
+            <span id="timelineCount" class="pill">0件</span>
+          </div>
+          <div id="timeline" class="timeline"></div>
+        </article>
+      </section>
+
+      <section class="reflection-grid">
+        <article class="panel">
+          <p class="eyebrow">OWNERSHIP</p>
+          <h2>他責を自責に変える</h2>
+          <textarea id="blameInput" rows="4" placeholder="例: 時間がないから進まない"></textarea>
+          <button id="reframeButton" class="wide-button" type="button">自分が動ける言葉に変換</button>
+          <div id="reframeOutput" class="reframe-output">ここに変換結果が出ます。</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">AI PROMPT</p>
+              <h2>AIに渡す指示</h2>
+            </div>
+            <button id="copyPromptButton" type="button">コピー</button>
+          </div>
+          <textarea id="aiPrompt" rows="9" readonly></textarea>
+        </article>
+      </section>
+    </main>
+
+    <dialog id="setupDialog">
+      <form method="dialog" class="setup-card">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">PROFILE</p>
+            <h2>人生時計の設定</h2>
+          </div>
+          <button value="close" type="submit">閉じる</button>
+        </div>
+        <label>
+          名前
+          <input id="profileName" maxlength="30">
+        </label>
+        <label>
+          生年月日
+          <input id="birthDate" type="date">
+        </label>
+        <label>
+          平均余命として見る年齢
+          <input id="averageAge" type="number" min="1" max="130" step="0.01">
+        </label>
+        <label>
+          目標寿命
+          <input id="targetAge" type="number" min="1" max="130" step="1">
+        </label>
+        <p class="setup-note">数値は自分の感覚に合わせて変えられます。保存はこのブラウザ内だけです。</p>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
